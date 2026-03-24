@@ -307,7 +307,7 @@ function renderMatchSummary() {
     // Damage Dealt
     const dmgTraces = guilds.map(g => {
         const rows = summary.filter(s => s.guild === g);
-        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => s['Damage Dealt']), s => fmtSI(s['Damage Dealt']));
+        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => s['Damage Dealt']), v => fmtSI(v));
     });
     Plotly.react('chart-damage', dmgTraces, {
         ...PLOT_BASE, barmode: 'group',
@@ -319,7 +319,7 @@ function renderMatchSummary() {
     // K/D
     const kdTraces = guilds.map(g => {
         const rows = summary.filter(s => s.guild === g);
-        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => parseFloat(s['K/D'])), s => s['K/D']);
+        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => parseFloat(s['K/D'])), v => String(v));
     });
     Plotly.react('chart-kd', kdTraces, {
         ...PLOT_BASE, barmode: 'group',
@@ -398,7 +398,7 @@ function renderGuildComparison() {
     const maxVal = Math.max(...matchRows.map(r => r[stat]), 1);
     const traces = guilds.map(g => {
         const gRows = sorted.filter(r => r.guild === g);
-        return trace(g, gRows.map(r => r.Player), gRows.map(r => r[stat]), r => fmtSI(r[stat]));
+        return trace(g, gRows.map(r => r.Player), gRows.map(r => r[stat]), v => fmtSI(v));
     });
     Plotly.react('chart-guild', traces, {
         ...PLOT_BASE, barmode: 'group',
