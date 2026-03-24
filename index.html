@@ -349,7 +349,7 @@ function renderLeaderboard() {
     }], {
         ...PLOT_BASE,
         xaxis: { ...PLOT_BASE.xaxis, title: 'Player' },
-        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * 1.2] },
+        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * 1.35] },
         showlegend: false,
     });
 
