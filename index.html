@@ -389,7 +389,7 @@ function renderGuildComparison() {
         const color = TEAM_COLORS[team] || '#888';
         const col = document.createElement('div');
         col.className = 'col-md-6';
-        col.innerHTML = `<div style="font-weight:bold;color:${color};margin-bottom:.5rem">${guild} (${team})</div>
+        col.innerHTML = `<div style="font-weight:bold;color:${color};margin-bottom:.5rem">${guild} (${team}) — ${gRows.length} players</div>
             ${buildTable(gRows, ['Player', 'team', ...NUMERIC_COLS, 'K/D'])}`;
         tablesDiv.appendChild(col);
     }
