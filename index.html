@@ -385,7 +385,7 @@ function renderGuildComparison() {
     tablesDiv.innerHTML = '';
 
     for (const guild of guilds) {
-        const gRows = matchRows.filter(r => r.guild === guild).sort((a, b) => b['K/D'] - a['K/D']);
+        const gRows = matchRows.filter(r => r.guild === guild).sort((a, b) => b[stat] - a[stat]);
         const team = gRows[0]?.team || '';
         const color = TEAM_COLORS[team] || '#888';
         const col = document.createElement('div');
