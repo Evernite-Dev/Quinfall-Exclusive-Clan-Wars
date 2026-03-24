@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clan Wars Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <style>
+        body { background: #0e1117; color: #fafafa; }
+        .card-dark { background: #1e2130; border: 1px solid #444; border-radius: 8px; padding: 1rem; }
+        .nav-tabs .nav-link { color: #aaa; border-color: transparent; }
+        .nav-tabs .nav-link:hover { color: #fff; border-color: transparent; }
+        .nav-tabs .nav-link.active { color: #fff; background: #1e2130; border-color: #444 #444 #1e2130; }
+        .tab-content { background: #1e2130; padding: 1.25rem; border: 1px solid #444; border-top: none; border-radius: 0 0 6px 6px; }
+        .scorecard { background: #1e2130; border: 1px solid #444; border-radius: 8px; padding: 12px; text-align: center; min-width: 200px; }
+        .table { color: #fafafa; }
+        .table-dark { --bs-table-bg: #1e2130; --bs-table-hover-bg: #2a2d3e; }
+        .form-select { background-color: #1e2130; color: #fafafa; border-color: #555; }
+        .form-select:focus { background-color: #1e2130; color: #fafafa; border-color: #888; box-shadow: none; }
+        .btn-filter { font-size: 0.8rem; padding: 2px 10px; border-radius: 20px; }
+        .btn-filter.active { background: #4a4a8a; border-color: #7070cc; color: #fff; }
+        .btn-filter:not(.active) { background: transparent; border-color: #555; color: #aaa; }
+        hr { border-color: #444; }
+    </style>
+</head>
+<body>
+<div class="container-fluid p-3">
+    <h2 class="mb-3">Clan Wars Stats</h2>
+
+    <!-- Filters -->
+    <div class="card-dark mb-3">
+        <div id="filters" class="d-flex flex-wrap gap-4"></div>
+        <div class="text-muted small mt-2" id="player-count"></div>
+    </div>
+
+    <!-- Scorecards -->
+    <div id="scorecards" class="d-flex flex-wrap gap-3 mb-3"></div>
+    <hr>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="mainTabs">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-summary">Match Summary</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-leaderboard">Player Leaderboard</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-guild">Guild Comparison</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-raw">Raw Data</button></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <!-- Tab 1: Match Summary -->
+        <div class="tab-pane fade show active" id="tab-summary">
+            <h5 class="mt-1 mb-3">Totals per Guild per Match</h5>
+            <div id="summary-table" class="mb-4"></div>
+            <h5 class="mb-2">Damage Dealt by Guild (per Match)</h5>
+            <div id="chart-damage" class="mb-4"></div>
+            <h5 class="mb-2">Kill / Death Ratio by Guild (per Match)</h5>
+            <div id="chart-kd"></div>
+        </div>
+
+        <!-- Tab 2: Player Leaderboard -->
+        <div class="tab-pane fade" id="tab-leaderboard">
+            <div class="d-flex align-items-center gap-3 mt-1 mb-3">
+                <span class="text-muted small">Sort by</span>
+                <select id="leaderboard-sort" class="form-select form-select-sm w-auto" onchange="renderLeaderboard()">
+                    <option>Kill</option>
+                    <option>Death</option>
+                    <option>Damage Received</option>
+                    <option selected>Damage Dealt</option>
+                    <option>Heal</option>
+                    <option>Activated Altar</option>
+                </select>
+            </div>
+            <h5 class="mb-2">Top 10 Players</h5>
+            <div id="chart-top10" class="mb-4"></div>
+            <h5 class="mb-2">Full Leaderboard</h5>
+            <div id="leaderboard-table"></div>
+        </div>
+
+        <!-- Tab 3: Guild Comparison -->
+        <div class="tab-pane fade" id="tab-guild">
+            <div class="d-flex flex-wrap gap-3 mt-1 mb-3">
+                <div>
+                    <label class="form-label text-muted small mb-1">Match</label>
+                    <select id="guild-match" class="form-select form-select-sm" style="min-width:180px" onchange="renderGuildComparison()"></select>
+                </div>
+                <div>
+                    <label class="form-label text-muted small mb-1">Stat</label>
+                    <select id="guild-stat" class="form-select form-select-sm" onchange="renderGuildComparison()">
+                        <option>Kill</option>
+                        <option>Death</option>
+                        <option>Damage Received</option>
+                        <option selected>Damage Dealt</option>
+                        <option>Heal</option>
+                        <option>Activated Altar</option>
+                    </select>
+                </div>
+            </div>
+            <div id="guild-tables" class="row g-3 mb-4"></div>
+            <div id="chart-guild"></div>
+        </div>
+
+        <!-- Tab 4: Raw Data -->
+        <div class="tab-pane fade" id="tab-raw">
+            <div class="d-flex justify-content-end mb-2 mt-1">
+                <button class="btn btn-sm btn-outline-secondary" onclick="downloadCSV()">Download as CSV</button>
+            </div>
+            <div id="raw-table"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// ── Constants ────────────────────────────────────────────────────────────────
+const NUMERIC_COLS = ['Kill', 'Death', 'Damage Received', 'Damage Dealt', 'Heal', 'Activated Altar'];
+const LABEL_FONT_SIZE = 24;
+const TEAM_COLORS = { blue: '#4472C4', red: '#C0392B' };
+const PLOT_BASE = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor:  'rgba(20,22,35,0.6)',
+    font:          { color: '#fafafa' },
+    xaxis:         { gridcolor: '#333', linecolor: '#555' },
+    yaxis:         { gridcolor: '#333', linecolor: '#555' },
+    legend:        { bgcolor: 'rgba(0,0,0,0)' },
+    margin:        { t: 40, b: 80, l: 60, r: 20 },
+};
+
+// ── State ────────────────────────────────────────────────────────────────────
+let allRows = [];
+let activeFilters = { days: new Set(), matches: new Set(), guilds: new Set(), teams: new Set() };
+let filteredRows = [];
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+async function init() {
+    try {
+        const resp = await fetch('./clan-war-data.json.json');
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+        allRows = flatten(data);
+
+        const days    = [...new Set(allRows.map(r => r.day))].sort();
+        const matches = [...new Set(allRows.map(r => r.match))].sort((a, b) => a - b);
+        const guilds  = [...new Set(allRows.map(r => r.guild))].sort();
+        const teams   = [...new Set(allRows.map(r => r.team))].sort();
+
+        activeFilters = { days: new Set(days), matches: new Set(matches), guilds: new Set(guilds), teams: new Set(teams) };
+        buildFilters({ days, matches, guilds, teams });
+        render();
+    } catch (e) {
+        document.body.innerHTML = `<div class="container mt-5"><div class="alert alert-danger">Failed to load data: ${e.message}</div></div>`;
+    }
+}
+
+// Resize Plotly charts when a tab becomes visible
+document.querySelectorAll('[data-bs-toggle="tab"]').forEach(btn => {
+    btn.addEventListener('shown.bs.tab', () => {
+        document.querySelectorAll('[id^="chart-"]').forEach(el => {
+            if (el._fullLayout) Plotly.Plots.resize(el);
+        });
+    });
+});
+
+// ── Data helpers ─────────────────────────────────────────────────────────────
+function flatten(data) {
+    const rows = [];
+    for (const m of data.matches) {
+        for (const g of m.guilds) {
+            for (const p of g.players) {
+                rows.push({
+                    day: data.date, match: m.match, guild: g.guild, team: g.flag,
+                    Player: p.player, Kill: p.kill, Death: p.death,
+                    'Damage Received': p.damage_received, 'Damage Dealt': p.damage_dealt,
+                    Heal: p.heal, 'Activated Altar': p.activated_altar,
+                });
+            }
+        }
+    }
+    return rows;
+}
+
+function getFiltered() {
+    return allRows.filter(r =>
+        activeFilters.days.has(r.day) &&
+        activeFilters.matches.has(r.match) &&
+        activeFilters.guilds.has(r.guild) &&
+        activeFilters.teams.has(r.team)
+    );
+}
+
+function groupSum(rows, keyFn, cols) {
+    const map = new Map();
+    for (const r of rows) {
+        const key = keyFn(r);
+        if (!map.has(key)) {
+            const entry = { ...r };
+            for (const c of cols) entry[c] = 0;
+            map.set(key, entry);
+        }
+        for (const c of cols) map.get(key)[c] += r[c] || 0;
+    }
+    return [...map.values()];
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────────
+function buildFilters({ days, matches, guilds, teams }) {
+    const container = document.getElementById('filters');
+    const sections = [
+        { label: 'Day',   key: 'days',    values: days },
+        { label: 'Match', key: 'matches', values: matches },
+        { label: 'Guild', key: 'guilds',  values: guilds },
+        { label: 'Team',  key: 'teams',   values: teams },
+    ];
+
+    for (const { label, key, values } of sections) {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `<div class="text-muted small mb-1">${label}</div>`;
+        const group = document.createElement('div');
+        group.className = 'd-flex flex-wrap gap-1';
+
+        for (const val of values) {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-filter active';
+            btn.textContent = String(val);
+            btn.addEventListener('click', () => {
+                const v = typeof val === 'number' ? val : val;
+                if (activeFilters[key].has(v)) {
+                    activeFilters[key].delete(v);
+                    btn.classList.remove('active');
+                } else {
+                    activeFilters[key].add(v);
+                    btn.classList.add('active');
+                }
+                render();
+            });
+            group.appendChild(btn);
+        }
+
+        wrap.appendChild(group);
+        container.appendChild(wrap);
+    }
+}
+
+// ── Main render ───────────────────────────────────────────────────────────────
+function render() {
+    filteredRows = getFiltered();
+    document.getElementById('player-count').textContent = `Players shown: ${filteredRows.length}`;
+    renderScorecards();
+    renderMatchSummary();
+    renderLeaderboard();
+    populateGuildMatchSelector();
+    renderGuildComparison();
+    renderRawData();
+}
+
+// ── Scorecards ─────────────────────────────────────────────────────────────────
+function renderScorecards() {
+    const base = allRows.filter(r => activeFilters.days.has(r.day) && activeFilters.matches.has(r.match));
+    const map = {};
+    for (const r of base) {
+        const k = `${r.day}|${r.match}`;
+        if (!map[k]) map[k] = { day: r.day, match: r.match, blue: 0, red: 0, blueGuild: '', redGuild: '' };
+        map[k][r.team] = (map[k][r.team] || 0) + r.Kill;
+        if (!map[k][`${r.team}Guild`]) map[k][`${r.team}Guild`] = r.guild;
+    }
+
+    const container = document.getElementById('scorecards');
+    container.innerHTML = '';
+
+    Object.values(map)
+        .sort((a, b) => a.day < b.day ? -1 : a.day > b.day ? 1 : a.match - b.match)
+        .forEach(m => {
+            const bWin = m.blue > m.red, rWin = m.red > m.blue;
+            const bLabel = bWin ? '🏆 W' : rWin ? 'L' : 'Draw';
+            const rLabel = rWin ? '🏆 W' : bWin ? 'L' : 'Draw';
+            const card = document.createElement('div');
+            card.className = 'scorecard';
+            card.innerHTML = `
+                <div style="font-size:.75rem;color:#aaa;margin-bottom:4px">Match ${m.match} · ${m.day}</div>
+                <div style="display:flex;justify-content:space-around;align-items:center">
+                    <div>
+                        <div style="color:#4472C4;font-weight:bold;font-size:1.1rem">${m.blue} kills</div>
+                        <div style="color:#4472C4;font-size:.8rem">${m.blueGuild || 'Blue'} · ${bLabel}</div>
+                    </div>
+                    <div style="color:#888;font-size:1.2rem">vs</div>
+                    <div>
+                        <div style="color:#C0392B;font-weight:bold;font-size:1.1rem">${m.red} kills</div>
+                        <div style="color:#C0392B;font-size:.8rem">${m.redGuild || 'Red'} · ${rLabel}</div>
+                    </div>
+                </div>`;
+            container.appendChild(card);
+        });
+}
+
+// ── Match Summary ──────────────────────────────────────────────────────────────
+function renderMatchSummary() {
+    const summary = groupSum(filteredRows, r => `${r.day}|${r.match}|${r.guild}|${r.team}`, NUMERIC_COLS)
+        .sort((a, b) => a.day !== b.day ? (a.day < b.day ? -1 : 1) : a.match !== b.match ? a.match - b.match : a.guild < b.guild ? -1 : 1);
+    summary.forEach(s => s['K/D'] = kd(s.Kill, s.Death));
+
+    document.getElementById('summary-table').innerHTML =
+        buildTable(summary, ['day', 'match', 'guild', 'team', ...NUMERIC_COLS, 'K/D']);
+
+    const guilds = [...new Set(summary.map(s => s.guild))];
+
+    // Damage Dealt
+    const dmgTraces = guilds.map(g => {
+        const rows = summary.filter(s => s.guild === g);
+        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => s['Damage Dealt']), s => fmtSI(s['Damage Dealt']));
+    });
+    Plotly.react('chart-damage', dmgTraces, {
+        ...PLOT_BASE, barmode: 'group',
+        xaxis: { ...PLOT_BASE.xaxis, title: 'Match' },
+        yaxis: { ...PLOT_BASE.yaxis, range: [0, Math.max(...summary.map(s => s['Damage Dealt'])) * 1.2] },
+        legend: { ...PLOT_BASE.legend, title: { text: 'Guild' } },
+    });
+
+    // K/D
+    const kdTraces = guilds.map(g => {
+        const rows = summary.filter(s => s.guild === g);
+        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => parseFloat(s['K/D'])), s => s['K/D']);
+    });
+    Plotly.react('chart-kd', kdTraces, {
+        ...PLOT_BASE, barmode: 'group',
+        xaxis: { ...PLOT_BASE.xaxis, title: 'Match' },
+        yaxis: { ...PLOT_BASE.yaxis, range: [0, Math.max(...summary.map(s => parseFloat(s['K/D']))) * 1.2] },
+        legend: { ...PLOT_BASE.legend, title: { text: 'Guild' } },
+    });
+}
+
+// ── Player Leaderboard ─────────────────────────────────────────────────────────
+function renderLeaderboard() {
+    const sortCol = document.getElementById('leaderboard-sort').value;
+    const board = groupSum(filteredRows, r => `${r.Player}|${r.guild}|${r.team}`, NUMERIC_COLS)
+        .sort((a, b) => b[sortCol] - a[sortCol]);
+    board.forEach(p => p['K/D'] = kd(p.Kill, p.Death));
+
+    const top10 = board.slice(0, 10);
+    Plotly.react('chart-top10', [{
+        type: 'bar',
+        x: top10.map(p => p.Player),
+        y: top10.map(p => p[sortCol]),
+        marker: { color: top10.map(p => TEAM_COLORS[p.team] || '#888') },
+        text: top10.map(p => fmt(p[sortCol])),
+        textposition: 'outside',
+        textfont: { size: LABEL_FONT_SIZE },
+    }], {
+        ...PLOT_BASE,
+        xaxis: { ...PLOT_BASE.xaxis, title: 'Player' },
+        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * 1.2] },
+        showlegend: false,
+    });
+
+    document.getElementById('leaderboard-table').innerHTML =
+        buildTable(board, ['Player', 'guild', 'team', ...NUMERIC_COLS, 'K/D'], true);
+}
+
+// ── Guild Comparison ───────────────────────────────────────────────────────────
+function populateGuildMatchSelector() {
+    const sel = document.getElementById('guild-match');
+    const prev = sel.value;
+    const labels = [...new Map(
+        filteredRows.map(r => [`${r.day} · Match ${r.match}`, { day: r.day, match: r.match }])
+    ).keys()].sort();
+
+    sel.innerHTML = labels.map(l => `<option>${l}</option>`).join('');
+    if (labels.includes(prev)) sel.value = prev;
+}
+
+function renderGuildComparison() {
+    const label = document.getElementById('guild-match').value;
+    const stat  = document.getElementById('guild-stat').value;
+    if (!label) return;
+
+    const [dayPart, matchPart] = label.split(' · Match ');
+    const matchNum = parseInt(matchPart);
+    const matchRows = filteredRows
+        .filter(r => r.day === dayPart && r.match === matchNum)
+        .map(r => ({ ...r, 'K/D': parseFloat(kd(r.Kill, r.Death)) }));
+
+    const guilds = [...new Set(matchRows.map(r => r.guild))].sort();
+    const tablesDiv = document.getElementById('guild-tables');
+    tablesDiv.innerHTML = '';
+
+    for (const guild of guilds) {
+        const gRows = matchRows.filter(r => r.guild === guild).sort((a, b) => b['K/D'] - a['K/D']);
+        const team = gRows[0]?.team || '';
+        const color = TEAM_COLORS[team] || '#888';
+        const col = document.createElement('div');
+        col.className = 'col-md-6';
+        col.innerHTML = `<div style="font-weight:bold;color:${color};margin-bottom:.5rem">${guild} (${team})</div>
+            ${buildTable(gRows, ['Player', 'team', ...NUMERIC_COLS, 'K/D'])}`;
+        tablesDiv.appendChild(col);
+    }
+
+    const sorted = [...matchRows].sort((a, b) => b[stat] - a[stat]);
+    const maxVal = Math.max(...matchRows.map(r => r[stat]), 1);
+    const traces = guilds.map(g => {
+        const gRows = sorted.filter(r => r.guild === g);
+        return trace(g, gRows.map(r => r.Player), gRows.map(r => r[stat]), r => fmtSI(r[stat]));
+    });
+    Plotly.react('chart-guild', traces, {
+        ...PLOT_BASE, barmode: 'group',
+        xaxis: { ...PLOT_BASE.xaxis, tickangle: -45 },
+        yaxis: { ...PLOT_BASE.yaxis, range: [0, maxVal * 1.2] },
+    });
+}
+
+// ── Raw Data ────────────────────────────────────────────────────────────────────
+function renderRawData() {
+    document.getElementById('raw-table').innerHTML =
+        buildTable(filteredRows, ['day', 'match', 'guild', 'team', 'Player', ...NUMERIC_COLS]);
+}
+
+function downloadCSV() {
+    const cols = ['day', 'match', 'guild', 'team', 'Player', ...NUMERIC_COLS];
+    const lines = [cols.join(','), ...filteredRows.map(r => cols.map(c => JSON.stringify(r[c] ?? '')).join(','))];
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/csv' }));
+    a.download = 'clan_wars_stats.csv';
+    a.click();
+}
+
+// ── Shared helpers ──────────────────────────────────────────────────────────────
+function trace(name, x, y, textFn) {
+    return {
+        type: 'bar', name,
+        x, y,
+        text: y.map((_, i) => textFn(y[i])),
+        textposition: 'outside',
+        textfont: { size: LABEL_FONT_SIZE },
+    };
+}
+
+// Note: textFn in trace() is passed the raw value, not the row — fix below
+function buildTable(rows, cols, numbered = false) {
+    if (!rows.length) return '<p class="text-muted small">No data.</p>';
+    const th = (numbered ? '<th>#</th>' : '') + cols.map(c => `<th class="text-nowrap">${c}</th>`).join('');
+    const trs = rows.map((r, i) => {
+        const tds = cols.map(c => {
+            const v = r[c];
+            const display = (typeof v === 'number' && NUMERIC_COLS.includes(c)) ? fmt(v) : (v ?? '');
+            return `<td>${display}</td>`;
+        }).join('');
+        return `<tr>${numbered ? `<td class="text-muted">${i + 1}</td>` : ''}${tds}</tr>`;
+    }).join('');
+    return `<div class="table-responsive"><table class="table table-sm table-dark table-hover mb-0 align-middle">
+        <thead class="table-secondary"><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div>`;
+}
+
+function fmt(n)   { return Number(n).toLocaleString(); }
+function kd(k, d) { return (k / (d || 1)).toFixed(2); }
+function fmtSI(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + 'k';
+    return String(n);
+}
+
+// Fix trace() to pass the actual value
+(function patchTrace() {
+    const orig = trace;
+    window.trace = (name, x, y, textFn) => ({
+        type: 'bar', name, x, y,
+        text: y.map(v => textFn(v)),
+        textposition: 'outside',
+        textfont: { size: LABEL_FONT_SIZE },
+    });
+})();
+
+init();
+</script>
+</body>
+</html>
