@@ -349,7 +349,7 @@ function renderLeaderboard() {
     }], {
         ...PLOT_BASE,
         xaxis: { ...PLOT_BASE.xaxis, title: 'Player' },
-        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * 1.35] },
+        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * yPad(top10[0]?.[sortCol] || 1)] },
         showlegend: false,
     });
 
@@ -450,6 +450,12 @@ function buildTable(rows, cols, numbered = false) {
         <thead class="table-secondary"><tr>${th}</tr></thead><tbody>${trs}</tbody></table></div>`;
 }
 
+function yPad(maxVal) {
+    if (maxVal >= 1e6) return 1.25;
+    if (maxVal >= 1e4) return 1.30;
+    if (maxVal >= 100) return 1.38;
+    return 1.55;
+}
 function fmt(n)   { return Number(n).toLocaleString(); }
 function kd(k, d) { return (k / (d || 1)).toFixed(2); }
 function fmtSI(n) {
