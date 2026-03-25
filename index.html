@@ -276,6 +276,7 @@ function buildPillFilter(container, label, key, values, onChange) {
 }
 
 function buildGuildPills(wrap, guilds) {
+    guilds = [...guilds].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
     wrap.innerHTML = `<div class="text-muted small mb-1">Guild</div>`;
     const group = document.createElement('div');
     group.className = 'd-flex flex-wrap gap-1';
