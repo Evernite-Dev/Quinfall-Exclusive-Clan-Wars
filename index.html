@@ -209,40 +209,103 @@ function groupSum(rows, keyFn, cols) {
 // ── Filters ───────────────────────────────────────────────────────────────────
 function buildFilters({ days, matches, guilds, teams }) {
     const container = document.getElementById('filters');
-    const sections = [
-        { label: 'Day',   key: 'days',    values: days },
-        { label: 'Match', key: 'matches', values: matches },
-        { label: 'Guild', key: 'guilds',  values: guilds },
-        { label: 'Team',  key: 'teams',   values: teams },
-    ];
+    container.innerHTML = '';
 
-    for (const { label, key, values } of sections) {
-        const wrap = document.createElement('div');
-        wrap.innerHTML = `<div class="text-muted small mb-1">${label}</div>`;
-        const group = document.createElement('div');
-        group.className = 'd-flex flex-wrap gap-1';
+    // Day — multi-select dropdown
+    const dayWrap = document.createElement('div');
+    dayWrap.innerHTML = `<div class="text-muted small mb-1">Day</div>`;
+    const daySelect = document.createElement('select');
+    daySelect.id = 'filter-day';
+    daySelect.multiple = true;
+    daySelect.className = 'form-select form-select-sm';
+    daySelect.style.minWidth = '160px';
+    days.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        opt.selected = true;
+        daySelect.appendChild(opt);
+    });
+    daySelect.addEventListener('change', () => {
+        activeFilters.days = new Set([...daySelect.selectedOptions].map(o => o.value));
+        refreshGuildFilter();
+        render();
+    });
+    dayWrap.appendChild(daySelect);
+    container.appendChild(dayWrap);
 
-        for (const val of values) {
-            const btn = document.createElement('button');
-            btn.className = 'btn btn-filter active';
-            btn.textContent = String(val);
-            btn.addEventListener('click', () => {
-                const v = typeof val === 'number' ? val : val;
-                if (activeFilters[key].has(v)) {
-                    activeFilters[key].delete(v);
-                    btn.classList.remove('active');
-                } else {
-                    activeFilters[key].add(v);
-                    btn.classList.add('active');
-                }
-                render();
-            });
-            group.appendChild(btn);
-        }
+    // Match — pills
+    buildPillFilter(container, 'Match', 'matches', matches, () => {
+        refreshGuildFilter();
+        render();
+    });
 
-        wrap.appendChild(group);
-        container.appendChild(wrap);
+    // Guild — pills (rebuilt dynamically)
+    const guildWrap = document.createElement('div');
+    guildWrap.id = 'guild-filter-wrap';
+    container.appendChild(guildWrap);
+    buildGuildPills(guildWrap, guilds);
+
+    // Team — pills
+    buildPillFilter(container, 'Team', 'teams', teams, render);
+}
+
+function buildPillFilter(container, label, key, values, onChange) {
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `<div class="text-muted small mb-1">${label}</div>`;
+    const group = document.createElement('div');
+    group.className = 'd-flex flex-wrap gap-1';
+    for (const val of values) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-filter active';
+        btn.textContent = String(val);
+        btn.addEventListener('click', () => {
+            if (activeFilters[key].has(val)) {
+                activeFilters[key].delete(val);
+                btn.classList.remove('active');
+            } else {
+                activeFilters[key].add(val);
+                btn.classList.add('active');
+            }
+            onChange();
+        });
+        group.appendChild(btn);
     }
+    wrap.appendChild(group);
+    container.appendChild(wrap);
+}
+
+function buildGuildPills(wrap, guilds) {
+    wrap.innerHTML = `<div class="text-muted small mb-1">Guild</div>`;
+    const group = document.createElement('div');
+    group.className = 'd-flex flex-wrap gap-1';
+    for (const guild of guilds) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-filter' + (activeFilters.guilds.has(guild) ? ' active' : '');
+        btn.textContent = guild;
+        btn.addEventListener('click', () => {
+            if (activeFilters.guilds.has(guild)) {
+                activeFilters.guilds.delete(guild);
+                btn.classList.remove('active');
+            } else {
+                activeFilters.guilds.add(guild);
+                btn.classList.add('active');
+            }
+            render();
+        });
+        group.appendChild(btn);
+    }
+    wrap.appendChild(group);
+}
+
+function refreshGuildFilter() {
+    const available = [...new Set(
+        allRows
+            .filter(r => activeFilters.days.has(r.day) && activeFilters.matches.has(r.match))
+            .map(r => r.guild)
+    )].sort();
+    activeFilters.guilds = new Set(available);
+    buildGuildPills(document.getElementById('guild-filter-wrap'), available);
 }
 
 // ── Main render ───────────────────────────────────────────────────────────────
