@@ -3240,6 +3240,1590 @@
           ]
         }
       ]
+    },
+    {
+      "date": "2026-03-26",
+      "matches": [
+        {
+          "match": 1,
+          "guilds": [
+            {
+              "guild": "Exclusive",
+              "flag": "blue",
+              "players": [
+                {
+                  "player": "Ceeez",
+                  "kill": 2,
+                  "death": 5,
+                  "damage_received": 752906,
+                  "damage_dealt": 1778719,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Syndro",
+                  "kill": 10,
+                  "death": 4,
+                  "damage_received": 751970,
+                  "damage_dealt": 787964,
+                  "heal": 0,
+                  "activated_altar": 5
+                },
+                {
+                  "player": "MeleeHammer",
+                  "kill": 4,
+                  "death": 8,
+                  "damage_received": 2151247,
+                  "damage_dealt": 1106785,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Scythian",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 824161,
+                  "damage_dealt": 1603486,
+                  "heal": 5139137,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Blank",
+                  "kill": 7,
+                  "death": 10,
+                  "damage_received": 1231373,
+                  "damage_dealt": 2533398,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Enthu",
+                  "kill": 9,
+                  "death": 7,
+                  "damage_received": 652652,
+                  "damage_dealt": 1154142,
+                  "heal": 0,
+                  "activated_altar": 3
+                },
+                {
+                  "player": "Crossblesser",
+                  "kill": 1,
+                  "death": 9,
+                  "damage_received": 1058876,
+                  "damage_dealt": 931910,
+                  "heal": 1853915,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "HeavyHit",
+                  "kill": 2,
+                  "death": 12,
+                  "damage_received": 876120,
+                  "damage_dealt": 1039250,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Daedra",
+                  "kill": 12,
+                  "death": 4,
+                  "damage_received": 1069185,
+                  "damage_dealt": 1946649,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Metaman",
+                  "kill": 2,
+                  "death": 2,
+                  "damage_received": 1477664,
+                  "damage_dealt": 1095002,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Antlion",
+                  "kill": 4,
+                  "death": 2,
+                  "damage_received": 1415666,
+                  "damage_dealt": 696095,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Munitions",
+                  "kill": 2,
+                  "death": 5,
+                  "damage_received": 1369032,
+                  "damage_dealt": 868063,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Evernite",
+                  "kill": 0,
+                  "death": 3,
+                  "damage_received": 1573055,
+                  "damage_dealt": 1059712,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ezzy",
+                  "kill": 1,
+                  "death": 13,
+                  "damage_received": 1268450,
+                  "damage_dealt": 703148,
+                  "heal": 2990609,
+                  "activated_altar": 0
+                }
+              ]
+            },
+            {
+              "guild": "Wolves_of_War",
+              "flag": "red",
+              "players": [
+                {
+                  "player": "Anas",
+                  "kill": 6,
+                  "death": 1,
+                  "damage_received": 1078516,
+                  "damage_dealt": 1210181,
+                  "heal": 5894519,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Cavarria",
+                  "kill": 6,
+                  "death": 3,
+                  "damage_received": 1166097,
+                  "damage_dealt": 1054937,
+                  "heal": 3143506,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "jacobstips",
+                  "kill": 7,
+                  "death": 5,
+                  "damage_received": 522850,
+                  "damage_dealt": 441937,
+                  "heal": 0,
+                  "activated_altar": 4
+                },
+                {
+                  "player": "Shiin",
+                  "kill": 6,
+                  "death": 5,
+                  "damage_received": 1194541,
+                  "damage_dealt": 657434,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Mobyr",
+                  "kill": 5,
+                  "death": 3,
+                  "damage_received": 774305,
+                  "damage_dealt": 623999,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "DrNoePain",
+                  "kill": 6,
+                  "death": 5,
+                  "damage_received": 555121,
+                  "damage_dealt": 538913,
+                  "heal": 0,
+                  "activated_altar": 4
+                },
+                {
+                  "player": "CaileeChao",
+                  "kill": 1,
+                  "death": 5,
+                  "damage_received": 524073,
+                  "damage_dealt": 571820,
+                  "heal": 1243206,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "FullChub",
+                  "kill": 4,
+                  "death": 0,
+                  "damage_received": 1275787,
+                  "damage_dealt": 1341545,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Lunatacos",
+                  "kill": 2,
+                  "death": 8,
+                  "damage_received": 1054528,
+                  "damage_dealt": 274654,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Kaduga",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 980020,
+                  "damage_dealt": 665740,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Vain",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 801662,
+                  "damage_dealt": 1078603,
+                  "heal": 3919102,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "soulsnatcher",
+                  "kill": 2,
+                  "death": 6,
+                  "damage_received": 1393310,
+                  "damage_dealt": 651817,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "PapaFatBat",
+                  "kill": 2,
+                  "death": 2,
+                  "damage_received": 838906,
+                  "damage_dealt": 433315,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Pocketmorty",
+                  "kill": 5,
+                  "death": 0,
+                  "damage_received": 1103952,
+                  "damage_dealt": 1052468,
+                  "heal": 2548275,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "xSpartyHD",
+                  "kill": 5,
+                  "death": 5,
+                  "damage_received": 966560,
+                  "damage_dealt": 1067526,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Crunchay",
+                  "kill": 7,
+                  "death": 1,
+                  "damage_received": 790083,
+                  "damage_dealt": 1426160,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "CJFooL",
+                  "kill": 10,
+                  "death": 1,
+                  "damage_received": 1200158,
+                  "damage_dealt": 2181641,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "AngstyAmerican",
+                  "kill": 10,
+                  "death": 4,
+                  "damage_received": 1083854,
+                  "damage_dealt": 1199667,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": 2,
+          "guilds": [
+            {
+              "guild": "Exclusive",
+              "flag": "red",
+              "players": [
+                {
+                  "player": "Scythian",
+                  "kill": 1,
+                  "death": 0,
+                  "damage_received": 258881,
+                  "damage_dealt": 716323,
+                  "heal": 4323584,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ceeez",
+                  "kill": 9,
+                  "death": 3,
+                  "damage_received": 347786,
+                  "damage_dealt": 1031825,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Syndro",
+                  "kill": 4,
+                  "death": 3,
+                  "damage_received": 505374,
+                  "damage_dealt": 450616,
+                  "heal": 0,
+                  "activated_altar": 5
+                },
+                {
+                  "player": "Munitions",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 783455,
+                  "damage_dealt": 355599,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Metaman",
+                  "kill": 3,
+                  "death": 2,
+                  "damage_received": 908975,
+                  "damage_dealt": 367834,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ezzy",
+                  "kill": 0,
+                  "death": 6,
+                  "damage_received": 461254,
+                  "damage_dealt": 141359,
+                  "heal": 1762031,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Evernite",
+                  "kill": 0,
+                  "death": 3,
+                  "damage_received": 918720,
+                  "damage_dealt": 311419,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Daedra",
+                  "kill": 6,
+                  "death": 2,
+                  "damage_received": 684935,
+                  "damage_dealt": 987293,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "MeleeHammer",
+                  "kill": 1,
+                  "death": 6,
+                  "damage_received": 1065919,
+                  "damage_dealt": 453630,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Blank",
+                  "kill": 5,
+                  "death": 1,
+                  "damage_received": 294639,
+                  "damage_dealt": 1592323,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Crossblesser",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 262680,
+                  "damage_dealt": 451932,
+                  "heal": 1281588,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Enthu",
+                  "kill": 6,
+                  "death": 1,
+                  "damage_received": 206150,
+                  "damage_dealt": 644113,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "HeavyHit",
+                  "kill": 4,
+                  "death": 3,
+                  "damage_received": 610307,
+                  "damage_dealt": 665880,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Antlion",
+                  "kill": 2,
+                  "death": 3,
+                  "damage_received": 1013208,
+                  "damage_dealt": 323345,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Demize",
+                  "kill": 4,
+                  "death": 1,
+                  "damage_received": 344697,
+                  "damage_dealt": 1245067,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            },
+            {
+              "guild": "RedLine",
+              "flag": "blue",
+              "players": [
+                {
+                  "player": "TioBR",
+                  "kill": 0,
+                  "death": 3,
+                  "damage_received": 407671,
+                  "damage_dealt": 216523,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Psychodemon",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 808500,
+                  "damage_dealt": 273564,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "ArthurKing",
+                  "kill": 0,
+                  "death": 4,
+                  "damage_received": 630122,
+                  "damage_dealt": 278885,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Nuno",
+                  "kill": 2,
+                  "death": 0,
+                  "damage_received": 496362,
+                  "damage_dealt": 355394,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "GunGrave",
+                  "kill": 6,
+                  "death": 5,
+                  "damage_received": 481676,
+                  "damage_dealt": 904315,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "DainPeDeFerro",
+                  "kill": 0,
+                  "death": 7,
+                  "damage_received": 464815,
+                  "damage_dealt": 336058,
+                  "heal": 1576788,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Neytiri",
+                  "kill": 4,
+                  "death": 5,
+                  "damage_received": 501773,
+                  "damage_dealt": 616622,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Yoro",
+                  "kill": 3,
+                  "death": 2,
+                  "damage_received": 600769,
+                  "damage_dealt": 845274,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Goes",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 693535,
+                  "damage_dealt": 317629,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "BobDemolidor",
+                  "kill": 7,
+                  "death": 2,
+                  "damage_received": 479625,
+                  "damage_dealt": 1186076,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "RAASTA",
+                  "kill": 0,
+                  "death": 3,
+                  "damage_received": 724294,
+                  "damage_dealt": 194221,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Murma",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 384212,
+                  "damage_dealt": 428549,
+                  "heal": 2512726,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Pimenta",
+                  "kill": 2,
+                  "death": 2,
+                  "damage_received": 507345,
+                  "damage_dealt": 705880,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "EurrekaLG",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 1114419,
+                  "damage_dealt": 575710,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ayzen",
+                  "kill": 1,
+                  "death": 5,
+                  "damage_received": 266472,
+                  "damage_dealt": 325488,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Banzila",
+                  "kill": 8,
+                  "death": 3,
+                  "damage_received": 582462,
+                  "damage_dealt": 548204,
+                  "heal": 0,
+                  "activated_altar": 5
+                },
+                {
+                  "player": "rationait",
+                  "kill": 2,
+                  "death": 0,
+                  "damage_received": 594506,
+                  "damage_dealt": 558589,
+                  "heal": 2494942,
+                  "activated_altar": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": 3,
+          "guilds": [
+            {
+              "guild": "Exclusive",
+              "flag": "blue",
+              "players": [
+                {
+                  "player": "Ezzy",
+                  "kill": 0,
+                  "death": 7,
+                  "damage_received": 639104,
+                  "damage_dealt": 102870,
+                  "heal": 2455778,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Scythian",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 457962,
+                  "damage_dealt": 421944,
+                  "heal": 4443888,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ceeez",
+                  "kill": 5,
+                  "death": 8,
+                  "damage_received": 641837,
+                  "damage_dealt": 1052090,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "MeleeHammer",
+                  "kill": 0,
+                  "death": 9,
+                  "damage_received": 1598552,
+                  "damage_dealt": 439860,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Crossblesser",
+                  "kill": 2,
+                  "death": 3,
+                  "damage_received": 661149,
+                  "damage_dealt": 583042,
+                  "heal": 1397672,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Lheris",
+                  "kill": 2,
+                  "death": 7,
+                  "damage_received": 1246139,
+                  "damage_dealt": 438370,
+                  "heal": 1136990,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "HeavyHit",
+                  "kill": 0,
+                  "death": 11,
+                  "damage_received": 1073889,
+                  "damage_dealt": 853674,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Blank",
+                  "kill": 5,
+                  "death": 5,
+                  "damage_received": 808039,
+                  "damage_dealt": 1862593,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Metaman",
+                  "kill": 2,
+                  "death": 2,
+                  "damage_received": 1428315,
+                  "damage_dealt": 442723,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Daedra",
+                  "kill": 8,
+                  "death": 9,
+                  "damage_received": 920051,
+                  "damage_dealt": 1217348,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Evernite",
+                  "kill": 1,
+                  "death": 7,
+                  "damage_received": 1278263,
+                  "damage_dealt": 356477,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Enthu",
+                  "kill": 9,
+                  "death": 10,
+                  "damage_received": 641622,
+                  "damage_dealt": 1051292,
+                  "heal": 0,
+                  "activated_altar": 3
+                },
+                {
+                  "player": "Syndro",
+                  "kill": 6,
+                  "death": 8,
+                  "damage_received": 736915,
+                  "damage_dealt": 362033,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Antlion",
+                  "kill": 1,
+                  "death": 7,
+                  "damage_received": 1250931,
+                  "damage_dealt": 260815,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Munitions",
+                  "kill": 0,
+                  "death": 3,
+                  "damage_received": 1209588,
+                  "damage_dealt": 316290,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Demize",
+                  "kill": 5,
+                  "death": 4,
+                  "damage_received": 910710,
+                  "damage_dealt": 1382639,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            },
+            {
+              "guild": "uXa",
+              "flag": "red",
+              "players": [
+                {
+                  "player": "Brk",
+                  "kill": 2,
+                  "death": 2,
+                  "damage_received": 496561,
+                  "damage_dealt": 492268,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Cypheek",
+                  "kill": 0,
+                  "death": 1,
+                  "damage_received": 210120,
+                  "damage_dealt": 339702,
+                  "heal": 1909166,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Chano",
+                  "kill": 4,
+                  "death": 3,
+                  "damage_received": 555719,
+                  "damage_dealt": 516355,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Swift",
+                  "kill": 9,
+                  "death": 0,
+                  "damage_received": 328624,
+                  "damage_dealt": 339725,
+                  "heal": 2803027,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Drekt",
+                  "kill": 10,
+                  "death": 4,
+                  "damage_received": 755332,
+                  "damage_dealt": 943742,
+                  "heal": 0,
+                  "activated_altar": 3
+                },
+                {
+                  "player": "Falluja",
+                  "kill": 4,
+                  "death": 4,
+                  "damage_received": 428321,
+                  "damage_dealt": 1032609,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Gicer",
+                  "kill": 4,
+                  "death": 2,
+                  "damage_received": 260348,
+                  "damage_dealt": 700017,
+                  "heal": 1666883,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "BlackPlague",
+                  "kill": 4,
+                  "death": 4,
+                  "damage_received": 317636,
+                  "damage_dealt": 806104,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Turbolemon",
+                  "kill": 13,
+                  "death": 4,
+                  "damage_received": 813499,
+                  "damage_dealt": 1042106,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "WeaponsX",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 470438,
+                  "damage_dealt": 305486,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Viggy",
+                  "kill": 11,
+                  "death": 1,
+                  "damage_received": 584468,
+                  "damage_dealt": 1148885,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "UnDeAdz",
+                  "kill": 3,
+                  "death": 0,
+                  "damage_received": 648527,
+                  "damage_dealt": 967214,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Braylix",
+                  "kill": 1,
+                  "death": 0,
+                  "damage_received": 482012,
+                  "damage_dealt": 614971,
+                  "heal": 4755900,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Crater",
+                  "kill": 1,
+                  "death": 4,
+                  "damage_received": 386756,
+                  "damage_dealt": 396425,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Kyrrui",
+                  "kill": 11,
+                  "death": 2,
+                  "damage_received": 904365,
+                  "damage_dealt": 1991233,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Superthrive",
+                  "kill": 3,
+                  "death": 4,
+                  "damage_received": 564423,
+                  "damage_dealt": 493493,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Eli",
+                  "kill": 2,
+                  "death": 5,
+                  "damage_received": 768172,
+                  "damage_dealt": 393587,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Veeshan",
+                  "kill": 8,
+                  "death": 3,
+                  "damage_received": 397858,
+                  "damage_dealt": 525870,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Warbringar",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 786477,
+                  "damage_dealt": 413094,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Minty",
+                  "kill": 9,
+                  "death": 1,
+                  "damage_received": 984404,
+                  "damage_dealt": 2040180,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": 4,
+          "guilds": [
+            {
+              "guild": "Exclusive",
+              "flag": "red",
+              "players": [
+                {
+                  "player": "Zieku",
+                  "kill": 3,
+                  "death": 0,
+                  "damage_received": 549176,
+                  "damage_dealt": 613245,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ceeez",
+                  "kill": 3,
+                  "death": 1,
+                  "damage_received": 463591,
+                  "damage_dealt": 785176,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "MeleeHammer",
+                  "kill": 3,
+                  "death": 1,
+                  "damage_received": 613734,
+                  "damage_dealt": 215329,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Antlion",
+                  "kill": 0,
+                  "death": 2,
+                  "damage_received": 815460,
+                  "damage_dealt": 181719,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Crossblesser",
+                  "kill": 0,
+                  "death": 2,
+                  "damage_received": 253249,
+                  "damage_dealt": 426202,
+                  "heal": 1223493,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Blank",
+                  "kill": 7,
+                  "death": 2,
+                  "damage_received": 446796,
+                  "damage_dealt": 1046149,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Enthu",
+                  "kill": 9,
+                  "death": 5,
+                  "damage_received": 338093,
+                  "damage_dealt": 631974,
+                  "heal": 0,
+                  "activated_altar": 3
+                },
+                {
+                  "player": "Ezzy",
+                  "kill": 0,
+                  "death": 4,
+                  "damage_received": 307183,
+                  "damage_dealt": 69445,
+                  "heal": 1787328,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Metaman",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 465867,
+                  "damage_dealt": 143845,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Syndro",
+                  "kill": 6,
+                  "death": 5,
+                  "damage_received": 566759,
+                  "damage_dealt": 486246,
+                  "heal": 0,
+                  "activated_altar": 5
+                },
+                {
+                  "player": "Scythian",
+                  "kill": 2,
+                  "death": 0,
+                  "damage_received": 130764,
+                  "damage_dealt": 246495,
+                  "heal": 3643732,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "HeavyHit",
+                  "kill": 3,
+                  "death": 4,
+                  "damage_received": 680765,
+                  "damage_dealt": 568958,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Lheris",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 489415,
+                  "damage_dealt": 175309,
+                  "heal": 1530786,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Demize",
+                  "kill": 6,
+                  "death": 3,
+                  "damage_received": 475691,
+                  "damage_dealt": 737920,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Evernite",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 359951,
+                  "damage_dealt": 546647,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Daedra",
+                  "kill": 8,
+                  "death": 8,
+                  "damage_received": 810216,
+                  "damage_dealt": 859178,
+                  "heal": 0,
+                  "activated_altar": 1
+                }
+              ]
+            },
+            {
+              "guild": "Black_Sails",
+              "flag": "blue",
+              "players": [
+                {
+                  "player": "MulGirtab",
+                  "kill": 2,
+                  "death": 1,
+                  "damage_received": 400845,
+                  "damage_dealt": 624684,
+                  "heal": 738752,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Creyes",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 481434,
+                  "damage_dealt": 257678,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "ORIXA",
+                  "kill": 0,
+                  "death": 0,
+                  "damage_received": 279143,
+                  "damage_dealt": 115335,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ziad",
+                  "kill": 1,
+                  "death": 5,
+                  "damage_received": 579945,
+                  "damage_dealt": 435067,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Piratess",
+                  "kill": 0,
+                  "death": 4,
+                  "damage_received": 220539,
+                  "damage_dealt": 76566,
+                  "heal": 676584,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Fieldfire",
+                  "kill": 2,
+                  "death": 0,
+                  "damage_received": 294067,
+                  "damage_dealt": 293425,
+                  "heal": 2036054,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Brendismic",
+                  "kill": 9,
+                  "death": 6,
+                  "damage_received": 536136,
+                  "damage_dealt": 566027,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "LordFecalMatter",
+                  "kill": 8,
+                  "death": 5,
+                  "damage_received": 470491,
+                  "damage_dealt": 1348721,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Foamfang",
+                  "kill": 0,
+                  "death": 2,
+                  "damage_received": 463335,
+                  "damage_dealt": 147200,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Peoria",
+                  "kill": 0,
+                  "death": 1,
+                  "damage_received": 238906,
+                  "damage_dealt": 270346,
+                  "heal": 557642,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Zankio",
+                  "kill": 6,
+                  "death": 2,
+                  "damage_received": 556144,
+                  "damage_dealt": 834800,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Artumus",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 380899,
+                  "damage_dealt": 664475,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "fallen",
+                  "kill": 1,
+                  "death": 4,
+                  "damage_received": 419783,
+                  "damage_dealt": 218489,
+                  "heal": 0,
+                  "activated_altar": 5
+                },
+                {
+                  "player": "Hailboi",
+                  "kill": 2,
+                  "death": 1,
+                  "damage_received": 237695,
+                  "damage_dealt": 242085,
+                  "heal": 761195,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Demonfiter",
+                  "kill": 1,
+                  "death": 4,
+                  "damage_received": 655456,
+                  "damage_dealt": 567608,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Wabit",
+                  "kill": 1,
+                  "death": 2,
+                  "damage_received": 343985,
+                  "damage_dealt": 322434,
+                  "heal": 920073,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Fifoo",
+                  "kill": 2,
+                  "death": 7,
+                  "damage_received": 551983,
+                  "damage_dealt": 289163,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "DeTecTx",
+                  "kill": 0,
+                  "death": 2,
+                  "damage_received": 623051,
+                  "damage_dealt": 492607,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "match": 5,
+          "guilds": [
+            {
+              "guild": "Exclusive",
+              "flag": "red",
+              "players": [
+                {
+                  "player": "HeavyHit",
+                  "kill": 0,
+                  "death": 12,
+                  "damage_received": 788335,
+                  "damage_dealt": 965220,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Crossblesser",
+                  "kill": 0,
+                  "death": 7,
+                  "damage_received": 934359,
+                  "damage_dealt": 689932,
+                  "heal": 1358290,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Zieku",
+                  "kill": 2,
+                  "death": 1,
+                  "damage_received": 1073199,
+                  "damage_dealt": 1754381,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Scythian",
+                  "kill": 1,
+                  "death": 6,
+                  "damage_received": 855949,
+                  "damage_dealt": 658133,
+                  "heal": 3408706,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Enthu",
+                  "kill": 9,
+                  "death": 12,
+                  "damage_received": 919116,
+                  "damage_dealt": 1326775,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Ezzy",
+                  "kill": 0,
+                  "death": 7,
+                  "damage_received": 822331,
+                  "damage_dealt": 173971,
+                  "heal": 2518837,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Ceeez",
+                  "kill": 3,
+                  "death": 8,
+                  "damage_received": 692059,
+                  "damage_dealt": 1164740,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "MeleeHammer",
+                  "kill": 0,
+                  "death": 8,
+                  "damage_received": 1491556,
+                  "damage_dealt": 381203,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Metaman",
+                  "kill": 0,
+                  "death": 4,
+                  "damage_received": 1389922,
+                  "damage_dealt": 564289,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Demize",
+                  "kill": 2,
+                  "death": 7,
+                  "damage_received": 739605,
+                  "damage_dealt": 1128760,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Zezzus",
+                  "kill": 0,
+                  "death": 8,
+                  "damage_received": 223843,
+                  "damage_dealt": 70576,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Evernite",
+                  "kill": 3,
+                  "death": 7,
+                  "damage_received": 1069390,
+                  "damage_dealt": 812697,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Syndro",
+                  "kill": 0,
+                  "death": 6,
+                  "damage_received": 662941,
+                  "damage_dealt": 448354,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Lheris",
+                  "kill": 0,
+                  "death": 7,
+                  "damage_received": 1012689,
+                  "damage_dealt": 227130,
+                  "heal": 2296807,
+                  "activated_altar": 0
+                }
+              ]
+            },
+            {
+              "guild": "Addiction",
+              "flag": "blue",
+              "players": [
+                {
+                  "player": "Carbon",
+                  "kill": 8,
+                  "death": 1,
+                  "damage_received": 564550,
+                  "damage_dealt": 597234,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Geneser",
+                  "kill": 1,
+                  "death": 0,
+                  "damage_received": 277428,
+                  "damage_dealt": 153899,
+                  "heal": 4185893,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Arisonu",
+                  "kill": 6,
+                  "death": 0,
+                  "damage_received": 497877,
+                  "damage_dealt": 1082488,
+                  "heal": 2542896,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "CorruptShadow",
+                  "kill": 13,
+                  "death": 1,
+                  "damage_received": 530282,
+                  "damage_dealt": 1598273,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Meril",
+                  "kill": 3,
+                  "death": 1,
+                  "damage_received": 986038,
+                  "damage_dealt": 699864,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Mecradore",
+                  "kill": 8,
+                  "death": 1,
+                  "damage_received": 519142,
+                  "damage_dealt": 1776246,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Renoz",
+                  "kill": 3,
+                  "death": 0,
+                  "damage_received": 676261,
+                  "damage_dealt": 654566,
+                  "heal": 2667227,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "baddog",
+                  "kill": 1,
+                  "death": 1,
+                  "damage_received": 676125,
+                  "damage_dealt": 174468,
+                  "heal": 0,
+                  "activated_altar": 2
+                },
+                {
+                  "player": "Nadasdy",
+                  "kill": 12,
+                  "death": 0,
+                  "damage_received": 661251,
+                  "damage_dealt": 1376300,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Vioarr",
+                  "kill": 18,
+                  "death": 3,
+                  "damage_received": 1213027,
+                  "damage_dealt": 1068100,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Devora",
+                  "kill": 3,
+                  "death": 6,
+                  "damage_received": 852762,
+                  "damage_dealt": 392908,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Hauteclaire",
+                  "kill": 3,
+                  "death": 0,
+                  "damage_received": 495520,
+                  "damage_dealt": 501645,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Smooggles",
+                  "kill": 5,
+                  "death": 4,
+                  "damage_received": 638929,
+                  "damage_dealt": 546842,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "Purpledranke",
+                  "kill": 1,
+                  "death": 0,
+                  "damage_received": 142395,
+                  "damage_dealt": 278048,
+                  "heal": 3101631,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Broccoli",
+                  "kill": 3,
+                  "death": 3,
+                  "damage_received": 587529,
+                  "damage_dealt": 463229,
+                  "heal": 0,
+                  "activated_altar": 1
+                },
+                {
+                  "player": "SinfulTed",
+                  "kill": 5,
+                  "death": 1,
+                  "damage_received": 795782,
+                  "damage_dealt": 642927,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "Lilkinsly",
+                  "kill": 3,
+                  "death": 1,
+                  "damage_received": 511424,
+                  "damage_dealt": 321681,
+                  "heal": 0,
+                  "activated_altar": 0
+                },
+                {
+                  "player": "fuzzy",
+                  "kill": 14,
+                  "death": 0,
+                  "damage_received": 788383,
+                  "damage_dealt": 1431592,
+                  "heal": 0,
+                  "activated_altar": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

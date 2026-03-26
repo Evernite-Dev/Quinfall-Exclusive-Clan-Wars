@@ -4,9 +4,23 @@
 
 **File naming convention:** `{match_number} - {guild_name}.png` — the match number and guild name are encoded in the filename. Use these to assign players to the correct match and guild.
 
+**File Notes**
+- The `{guild name}` in the file name will help identify which team the players are on.
+  - A majority of the `{guild name}` players should be present within their respective file.
+  - Verify the correct team using the flag color rules.
+  - Sort order is the same for screenshots in the same match.
+    - Two screenshots are required because the visible frame only shows a limited number of players.
+
 **Flag color rules:**
-- Blue flag next to a player = member of Exclusive
-- Red flag next to a player = member of the enemy guild named in that screenshot's filename
+- Flag colors can change between matches, so teams should be established on a per-match basis.
+- Determine which team is 'Exclusive' by checking the flag color next to any of the following players:
+  - Evernite
+  - Antlion
+  - Blank
+  - Ezzy
+- That flag's color belongs to guild = Exclusive
+- The other flag color marks a member of the enemy guild named in that screenshot's filename
+- Flag colors can either be red or blue.
 
 **Guild assignment rules:**
 - Read the flag color on each row independently. Do not assume all players in a screenshot belong to the same guild.
