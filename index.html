@@ -119,15 +119,31 @@ const NUMERIC_COLS = ['Kill', 'Death', 'Damage Received', 'Damage Dealt', 'Heal'
 const LABEL_FONT_SIZE = 24;
 const EXCLUSIVE_COLOR = '#8B5CF6';
 const GUILD_COLOR_PALETTE = ['#E74C3C','#F59E0B','#10B981','#3B82F6','#EC4899','#14B8A6','#F97316','#84CC16','#06B6D4','#EF4444'];
+const HOME_GUILD = 'Exclusive';
+const HOME_GUILD_RENAME_DATE = '2026-03-29';
+function homeGuildLabel(date) { return date >= HOME_GUILD_RENAME_DATE ? 'Blood Moon' : 'Exclusive'; }
+function canonicalGuild(guild) { return guild === 'Blood Moon' ? HOME_GUILD : guild; }
 let guildColors = {};
 function buildGuildColors(guilds) {
     guildColors = {};
     let i = 0;
     for (const g of [...guilds].sort()) {
-        guildColors[g] = g === 'Exclusive' ? EXCLUSIVE_COLOR : GUILD_COLOR_PALETTE[i++ % GUILD_COLOR_PALETTE.length];
+        guildColors[g] = g === HOME_GUILD ? EXCLUSIVE_COLOR : GUILD_COLOR_PALETTE[i++ % GUILD_COLOR_PALETTE.length];
     }
 }
 function guildColor(guild) { return guildColors[guild] || '#888'; }
+// Returns date-appropriate display name for a guild given the rows it covers
+function homeGuildTraceLabel(guild, rows) {
+    if (guild !== HOME_GUILD) return guild;
+    const hasPre  = rows.some(r => r.day < HOME_GUILD_RENAME_DATE);
+    const hasPost = rows.some(r => r.day >= HOME_GUILD_RENAME_DATE);
+    if (hasPre && hasPost) return 'Exclusive / Blood Moon';
+    return hasPost ? 'Blood Moon' : 'Exclusive';
+}
+// Map rows for table display: replace canonical HOME_GUILD name with date-appropriate label
+function displayRows(rows) {
+    return rows.map(r => r.guild === HOME_GUILD ? { ...r, guild: homeGuildLabel(r.day) } : r);
+}
 const PLOT_BASE = {
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor:  'rgba(20,22,35,0.6)',
@@ -181,7 +197,7 @@ function flatten(data) {
             for (const g of m.guilds) {
                 for (const p of g.players) {
                     rows.push({
-                        day: session.date, match: m.match, guild: g.guild,
+                        day: session.date, match: m.match, guild: canonicalGuild(g.guild),
                         Player: p.player, Kill: p.kill, Death: p.death,
                         'Damage Received': p.damage_received, 'Damage Dealt': p.damage_dealt,
                         Heal: p.heal, 'Activated Altar': p.activated_altar,
@@ -344,24 +360,24 @@ function renderScorecards() {
     Object.values(map)
         .sort((a, b) => a.day < b.day ? -1 : a.day > b.day ? 1 : a.match - b.match)
         .forEach(m => {
-            const excKills = m.guilds['Exclusive'] || 0;
-            const enemy = Object.entries(m.guilds).find(([g]) => g !== 'Exclusive');
+            const homeKills = m.guilds[HOME_GUILD] || 0;
+            const enemy = Object.entries(m.guilds).find(([g]) => g !== HOME_GUILD);
             const enemyName = enemy?.[0] || 'Enemy';
             const enemyKills = enemy?.[1] || 0;
-            const excWin = excKills > enemyKills, enemyWin = enemyKills > excKills;
+            const homeWin = homeKills > enemyKills, enemyWin = enemyKills > homeKills;
             const card = document.createElement('div');
             card.className = 'scorecard';
             card.innerHTML = `
                 <div style="font-size:.75rem;color:#aaa;margin-bottom:4px">Match ${m.match} · ${m.day}</div>
                 <div style="display:flex;justify-content:space-around;align-items:center">
                     <div>
-                        <div style="color:#4472C4;font-weight:bold;font-size:1.1rem">${excKills} kills</div>
-                        <div style="color:#4472C4;font-size:.8rem">Exclusive · ${excWin ? '🏆 W' : enemyWin ? 'L' : 'Draw'}</div>
+                        <div style="color:#4472C4;font-weight:bold;font-size:1.1rem">${homeKills} kills</div>
+                        <div style="color:#4472C4;font-size:.8rem">${homeGuildLabel(m.day)} · ${homeWin ? '🏆 W' : enemyWin ? 'L' : 'Draw'}</div>
                     </div>
                     <div style="color:#888;font-size:1.2rem">vs</div>
                     <div>
                         <div style="color:#C0392B;font-weight:bold;font-size:1.1rem">${enemyKills} kills</div>
-                        <div style="color:#C0392B;font-size:.8rem">${enemyName} · ${enemyWin ? '🏆 W' : excWin ? 'L' : 'Draw'}</div>
+                        <div style="color:#C0392B;font-size:.8rem">${enemyName} · ${enemyWin ? '🏆 W' : homeWin ? 'L' : 'Draw'}</div>
                     </div>
                 </div>`;
             container.appendChild(card);
@@ -375,14 +391,14 @@ function renderMatchSummary() {
     summary.forEach(s => s['K/D'] = kd(s.Kill, s.Death));
 
     document.getElementById('summary-table').innerHTML =
-        buildTable(summary, ['day', 'match', 'guild', ...NUMERIC_COLS, 'K/D']);
+        buildTable(displayRows(summary), ['day', 'match', 'guild', ...NUMERIC_COLS, 'K/D']);
 
     const guilds = [...new Set(summary.map(s => s.guild))];
 
     // Damage Dealt
     const dmgTraces = guilds.map(g => {
         const rows = summary.filter(s => s.guild === g);
-        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => s['Damage Dealt']), v => fmtSI(v), guildColor(g));
+        return trace(homeGuildTraceLabel(g, rows), rows.map(s => `${s.day} · M${s.match}`), rows.map(s => s['Damage Dealt']), v => fmtSI(v), guildColor(g));
     });
     Plotly.react('chart-damage', dmgTraces, {
         ...PLOT_BASE, barmode: 'group',
@@ -394,7 +410,7 @@ function renderMatchSummary() {
     // K/D
     const kdTraces = guilds.map(g => {
         const rows = summary.filter(s => s.guild === g);
-        return trace(g, rows.map(s => `${s.day} · M${s.match}`), rows.map(s => parseFloat(s['K/D'])), v => String(v), guildColor(g));
+        return trace(homeGuildTraceLabel(g, rows), rows.map(s => `${s.day} · M${s.match}`), rows.map(s => parseFloat(s['K/D'])), v => String(v), guildColor(g));
     });
     Plotly.react('chart-kd', kdTraces, {
         ...PLOT_BASE, barmode: 'group',
@@ -461,9 +477,10 @@ function renderGuildComparison() {
     for (const guild of guilds) {
         const gRows = matchRows.filter(r => r.guild === guild).sort((a, b) => b[stat] - a[stat]);
         const color = guildColor(guild);
+        const label = guild === HOME_GUILD ? homeGuildLabel(dayPart) : guild;
         const col = document.createElement('div');
         col.className = 'col-md-6';
-        col.innerHTML = `<div style="font-weight:bold;color:${color};margin-bottom:.5rem">${guild} — ${gRows.length} players</div>
+        col.innerHTML = `<div style="font-weight:bold;color:${color};margin-bottom:.5rem">${label} — ${gRows.length} players</div>
             ${buildTable(gRows, ['Player', ...NUMERIC_COLS, 'K/D'])}`;
         tablesDiv.appendChild(col);
     }
@@ -472,7 +489,8 @@ function renderGuildComparison() {
     const maxVal = Math.max(...matchRows.map(r => r[stat]), 1);
     const traces = guilds.map(g => {
         const gRows = sorted.filter(r => r.guild === g);
-        return trace(g, gRows.map(r => r.Player), gRows.map(r => r[stat]), v => fmtSI(v), guildColor(g));
+        const label = g === HOME_GUILD ? homeGuildLabel(dayPart) : g;
+        return trace(label, gRows.map(r => r.Player), gRows.map(r => r[stat]), v => fmtSI(v), guildColor(g));
     });
     Plotly.react('chart-guild', traces, {
         ...PLOT_BASE, barmode: 'group',
@@ -484,7 +502,7 @@ function renderGuildComparison() {
 // ── Raw Data ────────────────────────────────────────────────────────────────────
 function renderRawData() {
     document.getElementById('raw-table').innerHTML =
-        buildTable(filteredRows, ['day', 'match', 'guild', 'Player', ...NUMERIC_COLS]);
+        buildTable(displayRows(filteredRows), ['day', 'match', 'guild', 'Player', ...NUMERIC_COLS]);
 }
 
 function downloadCSV() {
