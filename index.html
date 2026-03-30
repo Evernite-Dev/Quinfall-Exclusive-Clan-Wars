@@ -197,7 +197,7 @@ function flatten(data) {
             for (const g of m.guilds) {
                 for (const p of g.players) {
                     rows.push({
-                        day: session.date, match: m.match, guild: canonicalGuild(g.guild),
+                        day: session.date, match: m.match, guild: canonicalGuild(g.guild.replace(/_/g, ' ')),
                         Player: p.player, Kill: p.kill, Death: p.death,
                         'Damage Received': p.damage_received, 'Damage Dealt': p.damage_dealt,
                         Heal: p.heal, 'Activated Altar': p.activated_altar,
