@@ -423,9 +423,9 @@ function renderMatchSummary() {
 // ── Player Leaderboard ─────────────────────────────────────────────────────────
 function renderLeaderboard() {
     const sortCol = document.getElementById('leaderboard-sort').value;
-    const board = groupSum(filteredRows, r => `${r.Player}|${r.guild}`, NUMERIC_COLS)
-        .sort((a, b) => b[sortCol] - a[sortCol]);
+    const board = groupSum(filteredRows, r => `${r.Player}|${r.guild}`, NUMERIC_COLS);
     board.forEach(p => p['K/D'] = kd(p.Kill, p.Death));
+    board.sort((a, b) => parseFloat(b[sortCol]) - parseFloat(a[sortCol]));
 
     const top10 = board.slice(0, 10);
     Plotly.react('chart-top10', [{
@@ -439,7 +439,7 @@ function renderLeaderboard() {
     }], {
         ...PLOT_BASE,
         xaxis: { ...PLOT_BASE.xaxis, title: 'Player' },
-        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, (top10[0]?.[sortCol] || 1) * yPad(top10[0]?.[sortCol] || 1)] },
+        yaxis: { ...PLOT_BASE.yaxis, title: sortCol, range: [0, parseFloat(top10[0]?.[sortCol] || 1) * yPad(parseFloat(top10[0]?.[sortCol] || 1))] },
         showlegend: false,
     });
 
