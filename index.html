@@ -44,6 +44,7 @@
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-summary">Match Summary</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-leaderboard">Player Leaderboard</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-guild">Guild Comparison</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-player">Player Stats</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-raw">Raw Data</button></li>
     </ul>
 
@@ -102,7 +103,22 @@
             <div id="chart-guild"></div>
         </div>
 
-        <!-- Tab 4: Raw Data -->
+        <!-- Tab 4: Player Stats -->
+        <div class="tab-pane fade" id="tab-player">
+            <div class="d-flex flex-wrap gap-4 mt-1 mb-3">
+                <div>
+                    <label class="form-label text-muted small mb-1">Player</label>
+                    <select id="player-select" class="form-select form-select-sm" style="min-width:240px" onchange="onPlayerChange()">
+                        <option value="">— Select a player —</option>
+                    </select>
+                </div>
+                <div id="enemy-guild-filter-wrap"></div>
+                <div id="player-stat-filter-wrap"></div>
+            </div>
+            <div id="player-stat-cards"><p class="text-muted small">Select a player to view their stats.</p></div>
+        </div>
+
+        <!-- Tab 5: Raw Data -->
         <div class="tab-pane fade" id="tab-raw">
             <div class="d-flex justify-content-end mb-2 mt-1">
                 <button class="btn btn-sm btn-outline-secondary" onclick="downloadCSV()">Download as CSV</button>
@@ -158,6 +174,9 @@ const PLOT_BASE = {
 let allRows = [];
 let activeFilters = { days: new Set(), matches: new Set(), guilds: new Set() };
 let filteredRows = [];
+const PLAYER_STAT_OPTIONS = [...NUMERIC_COLS, 'K/D'];
+let activeEnemyGuilds = new Set();
+let activePlayerStats = new Set(PLAYER_STAT_OPTIONS);
 
 // ── Boot ─────────────────────────────────────────────────────────────────────
 async function init() {
@@ -174,6 +193,7 @@ async function init() {
         buildGuildColors(guilds);
         activeFilters = { days: new Set(days), matches: new Set(matches), guilds: new Set(guilds) };
         buildFilters({ days, matches, guilds });
+        buildPlayerStatPills();
         render();
     } catch (e) {
         document.body.innerHTML = `<div class="container mt-5"><div class="alert alert-danger">Failed to load data: ${e.message}</div></div>`;
@@ -341,6 +361,7 @@ function render() {
     renderLeaderboard();
     populateGuildMatchSelector();
     renderGuildComparison();
+    renderPlayerStats();
     renderRawData();
 }
 
@@ -497,6 +518,153 @@ function renderGuildComparison() {
         xaxis: { ...PLOT_BASE.xaxis, tickangle: -45 },
         yaxis: { ...PLOT_BASE.yaxis, range: [0, maxVal * 1.2] },
     });
+}
+
+// ── Player Stats ──────────────────────────────────────────────────────────────
+function buildPlayerStatPills() {
+    const wrap = document.getElementById('player-stat-filter-wrap');
+    wrap.innerHTML = '<div class="text-muted small mb-1">Stats</div>';
+    const group = document.createElement('div');
+    group.className = 'd-flex flex-wrap gap-1';
+    for (const stat of PLAYER_STAT_OPTIONS) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-filter active';
+        btn.textContent = stat;
+        btn.addEventListener('click', () => {
+            if (activePlayerStats.has(stat)) { activePlayerStats.delete(stat); btn.classList.remove('active'); }
+            else { activePlayerStats.add(stat); btn.classList.add('active'); }
+            renderPlayerStatCards();
+        });
+        group.appendChild(btn);
+    }
+    wrap.appendChild(group);
+}
+
+function onPlayerChange() {
+    const sel = document.getElementById('player-select');
+    if (!sel.value) {
+        activeEnemyGuilds = new Set();
+        document.getElementById('enemy-guild-filter-wrap').innerHTML = '';
+        document.getElementById('player-stat-cards').innerHTML = '<p class="text-muted small">Select a player to view their stats.</p>';
+        return;
+    }
+    const sep = sel.value.indexOf('|');
+    const playerGuild = sel.value.slice(sep + 1);
+    const playerRows = filteredRows.filter(r => r.Player === sel.value.slice(0, sep) && r.guild === playerGuild);
+    const matchKeys = [...new Set(playerRows.map(r => `${r.day}|${r.match}`))];
+    const enemyGuilds = [...new Set(matchKeys.flatMap(k => {
+        const [day, mn] = k.split('|');
+        return allRows
+            .filter(r => r.day === day && r.match === parseInt(mn) && activeFilters.days.has(r.day) && activeFilters.matches.has(r.match) && r.guild !== playerGuild)
+            .map(r => r.guild);
+    }))].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+    activeEnemyGuilds = new Set(enemyGuilds);
+    buildEnemyGuildPills(enemyGuilds);
+    renderPlayerStatCards();
+}
+
+function buildEnemyGuildPills(enemyGuilds) {
+    const wrap = document.getElementById('enemy-guild-filter-wrap');
+    if (!enemyGuilds.length) { wrap.innerHTML = ''; return; }
+    wrap.innerHTML = '<div class="text-muted small mb-1">vs. Guild</div>';
+    const group = document.createElement('div');
+    group.className = 'd-flex flex-wrap gap-1';
+    for (const guild of enemyGuilds) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-filter' + (activeEnemyGuilds.has(guild) ? ' active' : '');
+        btn.textContent = guild;
+        btn.addEventListener('click', () => {
+            if (activeEnemyGuilds.has(guild)) { activeEnemyGuilds.delete(guild); btn.classList.remove('active'); }
+            else { activeEnemyGuilds.add(guild); btn.classList.add('active'); }
+            renderPlayerStatCards();
+        });
+        group.appendChild(btn);
+    }
+    wrap.appendChild(group);
+}
+
+function renderPlayerStats() {
+    // Rebuild player dropdown, preserving selection
+    const sel = document.getElementById('player-select');
+    const prev = sel.value;
+    const seen = new Map();
+    for (const r of filteredRows) {
+        const key = `${r.Player}|${r.guild}`;
+        if (!seen.has(key)) {
+            const gLabel = r.guild === HOME_GUILD ? 'Blood Moon' : r.guild;
+            seen.set(key, `[${gLabel}] ${r.Player}`);
+        }
+    }
+    const opts = [...seen.entries()].sort((a, b) => a[1].localeCompare(b[1]));
+    sel.innerHTML = '<option value="">— Select a player —</option>' +
+        opts.map(([val, label]) => `<option value="${val}">${label}</option>`).join('');
+    if (opts.some(([val]) => val === prev)) { sel.value = prev; }
+    else if (prev) { onPlayerChange(); return; }
+    renderPlayerStatCards();
+}
+
+function renderPlayerStatCards() {
+    const sel = document.getElementById('player-select');
+    const container = document.getElementById('player-stat-cards');
+    if (!sel.value) {
+        container.innerHTML = '<p class="text-muted small">Select a player to view their stats.</p>';
+        return;
+    }
+    const sep = sel.value.indexOf('|');
+    const playerName = sel.value.slice(0, sep);
+    const playerGuild = sel.value.slice(sep + 1);
+    const playerRows = filteredRows.filter(r => r.Player === playerName && r.guild === playerGuild);
+
+    const matchKeys = [...new Set(playerRows.map(r => `${r.day}|${r.match}`))].sort();
+    const matchInfo = matchKeys.map(k => {
+        const [day, mn] = k.split('|');
+        const matchNum = parseInt(mn);
+        const row = playerRows.find(r => r.day === day && r.match === matchNum);
+        const enemyGuild = [...new Set(
+            allRows.filter(r => r.day === day && r.match === matchNum &&
+                activeFilters.days.has(r.day) && activeFilters.matches.has(r.match) && r.guild !== playerGuild)
+            .map(r => r.guild)
+        )].join(', ') || '?';
+        return { day, match: matchNum, row, enemyGuild, label: `${day} · M${matchNum}` };
+    }).filter(m => activeEnemyGuilds.has(m.enemyGuild));
+
+    container.innerHTML = '';
+    if (!matchInfo.length) {
+        container.innerHTML = '<p class="text-muted small">No matches for the current selection.</p>';
+        return;
+    }
+
+    for (const stat of PLAYER_STAT_OPTIONS) {
+        if (!activePlayerStats.has(stat)) continue;
+        const values = matchInfo.map(m =>
+            stat === 'K/D' ? parseFloat(kd(m.row.Kill, m.row.Death)) : (m.row[stat] || 0));
+        const labels = matchInfo.map(m => m.label);
+        const chartId = `chart-player-${stat.replace(/[\s/]+/g, '-')}`;
+        const tableRows = matchInfo.map(m => ({
+            Date: m.day, Match: m.match, 'vs.': m.enemyGuild,
+            Kill: m.row.Kill, Death: m.row.Death,
+            'Damage Received': m.row['Damage Received'], 'Damage Dealt': m.row['Damage Dealt'],
+            Heal: m.row.Heal, 'Activated Altar': m.row['Activated Altar'],
+            'K/D': kd(m.row.Kill, m.row.Death),
+        }));
+        const card = document.createElement('div');
+        card.className = 'card-dark mb-3';
+        card.innerHTML = `<h6 class="mb-2">${stat}</h6><div id="${chartId}" class="mb-3"></div>${buildTable(tableRows, ['Date', 'Match', 'vs.', ...NUMERIC_COLS, 'K/D'])}`;
+        container.appendChild(card);
+        const maxVal = Math.max(...values, 1);
+        Plotly.react(chartId, [{
+            type: 'bar', x: labels, y: values,
+            marker: { color: guildColor(playerGuild) },
+            text: values.map(v => stat === 'K/D' ? String(v) : fmtSI(v)),
+            textposition: 'outside', textfont: { size: 16 },
+        }], {
+            ...PLOT_BASE, height: 220,
+            margin: { t: 10, b: 60, l: 60, r: 20 },
+            xaxis: { ...PLOT_BASE.xaxis },
+            yaxis: { ...PLOT_BASE.yaxis, range: [0, maxVal * yPad(maxVal)] },
+            showlegend: false,
+        });
+    }
 }
 
 // ── Raw Data ────────────────────────────────────────────────────────────────────
