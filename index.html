@@ -306,7 +306,7 @@ function buildGuildPills(wrap, guilds) {
     for (const guild of guilds) {
         const btn = document.createElement('button');
         btn.className = 'btn btn-filter' + (activeFilters.guilds.has(guild) ? ' active' : '');
-        btn.textContent = guild;
+        btn.textContent = guild === HOME_GUILD ? 'Blood Moon' : guild;
         btn.addEventListener('click', () => {
             if (activeFilters.guilds.has(guild)) {
                 activeFilters.guilds.delete(guild);
